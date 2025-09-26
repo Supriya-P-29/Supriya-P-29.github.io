@@ -308,24 +308,31 @@
             color: white;
         }
         
-        /* About Section */
+        /* About Section - UPDATED: Removed grid layout */
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .about-text h3 {
             font-size: 2rem;
             margin-bottom: 20px;
             color: var(--highlight);
+            text-align: center;
         }
         
+        .about-text p {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Education Section - NEW: Separate section */
         .education-tabs {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .education-item {
@@ -368,7 +375,7 @@
             transform: translateY(-3px);
         }
         
-        /* Experience Section */
+        /* Experience Section - UPDATED: Added connectors */
         .timeline {
             position: relative;
             max-width: 800px;
@@ -410,6 +417,49 @@
             left: 50%;
         }
         
+        /* NEW: Timeline connectors */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        /* NEW: Arrow pointers */
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 20px;
+            border-style: solid;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent rgba(42, 46, 75, 0.85);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent rgba(42, 46, 75, 0.85) transparent transparent;
+        }
+        
         .timeline-content {
             padding: 20px;
             background: rgba(42, 46, 75, 0.85);
@@ -432,7 +482,7 @@
             font-size: 0.9rem;
         }
         
-        /* Projects Section */
+        /* Projects Section - UPDATED: Added skill animations */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -468,7 +518,25 @@
             padding: 5px 12px;
             border-radius: 15px;
             font-size: 0.8rem;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: skillSlideIn 0.5s ease forwards;
         }
+        
+        /* NEW: Skill animation */
+        @keyframes skillSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Stagger the skill animations */
+        .project-card:hover .project-skill:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:hover .project-skill:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:hover .project-skill:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:hover .project-skill:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:hover .project-skill:nth-child(5) { animation-delay: 0.5s; }
         
         /* Contact Section */
         .contact-content {
@@ -534,10 +602,6 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
             .timeline::after {
                 left: 31px;
             }
@@ -550,6 +614,18 @@
             
             .timeline-item:nth-child(even) {
                 left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px !important;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -10px;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent rgba(42, 46, 75, 0.85) transparent transparent;
+                right: auto;
             }
             
             .hero-title {
@@ -622,7 +698,7 @@
     <!-- Starry Night Background -->
     <div id="stars"></div>
     
-    <!-- Header -->
+    <!-- Header - UPDATED: Added Education link -->
     <header>
         <div class="container">
             <nav>
@@ -630,6 +706,7 @@
                 <ul class="nav-links">
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#education">Education</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
@@ -643,6 +720,7 @@
     <section id="hero">
         <div class="container">
             <div class="hero-content">
+                <!-- UPDATED: Changed to placeholder that you can replace with your actual photo -->
                 <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" alt="Supriya Pilli" class="profile-img">
                 <h1 class="hero-title">Supriya Pilli</h1>
                 <h2 class="hero-subtitle">Software Engineer · Data/ML · Full-Stack</h2>
@@ -655,7 +733,7 @@
         </div>
     </section>
     
-    <!-- About Section -->
+    <!-- About Section - UPDATED: Only about text now -->
     <section id="about">
         <div class="container">
             <h2 class="section-title">About Me</h2>
@@ -665,21 +743,24 @@
                     <p>I am a passionate Computer Science graduate student at Western Michigan University with extensive experience in data science, machine learning, and software engineering. My expertise includes developing data-driven solutions, building predictive models, and creating full-stack applications.</p>
                     <p>I thrive in challenging environments where I can apply my technical skills to solve complex problems and deliver measurable results. With experience across healthcare, education, and manufacturing domains, I bring a versatile skill set to any team.</p>
                 </div>
-                
-                <div class="about-education">
-                    <h3>Education</h3>
-                    <div class="education-tabs">
-                        <div class="education-item card">
-                            <h4>Master of Science in Computer Science</h4>
-                            <p>Western Michigan University</p>
-                            <p>08/2023 - 12/2025 | GPA: 3.5/4.0</p>
-                        </div>
-                        <div class="education-item card">
-                            <h4>Bachelor of Engineering in Electronics and Communication</h4>
-                            <p>GITAM Hyderabad, India</p>
-                            <p>08/2017 - 07/2021 | GPA: 3.3/4.0</p>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Education Section - NEW: Separate section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-tabs">
+                <div class="education-item card">
+                    <h4>Master of Science in Computer Science</h4>
+                    <p>Western Michigan University</p>
+                    <p>08/2023 - 12/2025 | GPA: 3.5/4.0</p>
+                </div>
+                <div class="education-item card">
+                    <h4>Bachelor of Engineering in Electronics and Communication</h4>
+                    <p>GITAM Hyderabad, India</p>
+                    <p>08/2017 - 07/2021 | GPA: 3.3/4.0</p>
                 </div>
             </div>
         </div>
@@ -772,7 +853,7 @@
         </div>
     </section>
     
-    <!-- Experience Section -->
+    <!-- Experience Section - UPDATED: Now has connectors -->
     <section id="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
@@ -832,7 +913,7 @@
         </div>
     </section>
     
-    <!-- Projects Section -->
+    <!-- Projects Section - UPDATED: Skills now have animations -->
     <section id="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
@@ -1025,4 +1106,3 @@
     </script>
 </body>
 </html>
-
