@@ -717,7 +717,6 @@
         </div>
     </header>
     
-    <!-- Hero Section - UPDATED: Using your JPEG image -->
     <section id="hero">
         <div class="container">
             <div class="hero-content">
@@ -1047,4 +1046,62 @@
                 starsContainer.appendChild(shootingStar);
                 
                 // Remove the element after animation completes
-               
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, duration * 1000);
+            }
+            
+            // Create shooting stars at intervals
+            setInterval(createShootingStar, 3000);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Animation on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe section titles and cards
+            document.querySelectorAll('.section-title, .card, .timeline-item').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
