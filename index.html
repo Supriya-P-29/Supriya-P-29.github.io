@@ -538,6 +538,8 @@
         .project-card:hover .project-skill:nth-child(3) { animation-delay: 0.3s; }
         .project-card:hover .project-skill:nth-child(4) { animation-delay: 0.4s; }
         .project-card:hover .project-skill:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:hover .project-skill:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:hover .project-skill:nth-child(7) { animation-delay: 0.7s; }
         
         /* Contact Section */
         .contact-content {
@@ -765,7 +767,7 @@
         </div>
     </section>
     
-    <!-- Skills Section -->
+    <!-- Skills Section (updated with new categories and tags) -->
     <section id="skills">
         <div class="container">
             <h2 class="section-title">Skills</h2>
@@ -813,6 +815,11 @@
                         <span class="skill-tag">Putty</span>
                         <span class="skill-tag">MATLAB</span>
                         <span class="skill-tag">Selenium</span>
+                        <!-- New additions -->
+                        <span class="skill-tag">Microsoft 365</span>
+                        <span class="skill-tag">MDM/MAM</span>
+                        <span class="skill-tag">RBAC</span>
+                        <span class="skill-tag">MFA</span>
                     </div>
                 </div>
                 
@@ -848,18 +855,59 @@
                         <span class="skill-tag">Azure (Data Factory, Databricks, Data Lake, Synapse Analytics)</span>
                     </div>
                 </div>
+
+                <!-- New skill category: Networking & Support -->
+                <div class="skill-category card">
+                    <h3>Networking & Support</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">DNS</span>
+                        <span class="skill-tag">DHCP</span>
+                        <span class="skill-tag">TCP/IP</span>
+                        <span class="skill-tag">VPN</span>
+                        <span class="skill-tag">Firewall & Endpoint Security</span>
+                        <span class="skill-tag">Hardware Troubleshooting</span>
+                        <span class="skill-tag">System Backups</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     
-    <!-- Experience Section -->
+    <!-- Experience Section (updated with two new roles) -->
     <section id="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
+                <!-- New: IT Support Specialist -->
                 <div class="timeline-item">
                     <div class="timeline-content card">
-                        <div class="timeline-date">09/2024 - Present</div>
+                        <div class="timeline-date">12/2023 - 12/2025</div>
+                        <h3 class="timeline-title">IT Support Specialist</h3>
+                        <h4>WMU (OIT), MI, USA</h4>
+                        <p class="timeline-desc">
+                            • Delivered Tier 1–Tier 2 IT support by troubleshooting OS, application, network (DNS, IP, VPN), and access-control issues across Windows and macOS environments, ensuring SLA-aligned incident resolution.<br>
+                            • Resolved technical issues in college dashboards and academic platforms, including authentication failures, role-based access errors, and data sync inconsistencies, collaborating with IT and development teams to maintain system reliability.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- New: Data Operations Assistant -->
+                <div class="timeline-item">
+                    <div class="timeline-content card">
+                        <div class="timeline-date">10/2023 - 12/2025</div>
+                        <h3 class="timeline-title">Data Operations Assistant</h3>
+                        <h4>WMU, MI, USA</h4>
+                        <p class="timeline-desc">
+                            • Processed, cleaned, and validated large-scale academic datasets, improving data accuracy and consistency by 40% through automated quality checks and normalization workflows.<br>
+                            • Automated recurring data ingestion and transformation pipelines using Python/SQL, reducing manual processing time by 45% and improving turnaround for analytics use cases.<br>
+                            • Standardized datasets and reporting outputs, enabling ~25% faster downstream analysis for faculty and administrative decision-making.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content card">
+                        <div class="timeline-date">09/2024 - 12/2025</div>
                         <h3 class="timeline-title">Teaching Assistant & Supervisor</h3>
                         <h4>Western Michigan University, MI, USA</h4>
                         <p class="timeline-desc">
@@ -912,7 +960,7 @@
         </div>
     </section>
     
-    <!-- Projects Section -->
+    <!-- Projects Section (updated with two new projects) -->
     <section id="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
@@ -971,6 +1019,34 @@
                         <span class="project-skill">C++</span>
                         <span class="project-skill">IoT</span>
                         <span class="project-skill">Sensors</span>
+                    </div>
+                </div>
+
+                <!-- New project: Medical AI Diagnostic Assistant -->
+                <div class="project-card card">
+                    <h3 class="project-title">Medical AI Diagnostic Assistant</h3>
+                    <p class="project-desc">Built a 3-module, multi-modal medical AI system leveraging DenseNet-121, Sentence-BERT NLP covering 8 condition categories with weighted confidence scoring, and an OCR-based ECG pipeline (EasyOCR) implementing multi-factor cardiac risk scoring and emergency prioritization.</p>
+                    <div class="project-skills">
+                        <span class="project-skill">DenseNet-121</span>
+                        <span class="project-skill">Sentence-BERT</span>
+                        <span class="project-skill">EasyOCR</span>
+                        <span class="project-skill">Python</span>
+                        <span class="project-skill">NLP</span>
+                        <span class="project-skill">Multi-modal</span>
+                    </div>
+                </div>
+
+                <!-- New project: Multi-Site IT Infrastructure & Secure Network Simulation -->
+                <div class="project-card card">
+                    <h3 class="project-title">Multi-Site IT Infrastructure & Secure Network Simulation</h3>
+                    <p class="project-desc">Developed and implemented a simulated multi-office IT environment using Windows Server, Active Directory, DNS/DHCP, and VPN connectivity to ensure secure cross-site communication. Established endpoint hardening policies, configured firewall rules, implemented centralized backup solutions, and conducted system health monitoring to maintain 99%+ service uptime.</p>
+                    <div class="project-skills">
+                        <span class="project-skill">Windows Server</span>
+                        <span class="project-skill">Active Directory</span>
+                        <span class="project-skill">DNS/DHCP</span>
+                        <span class="project-skill">VPN</span>
+                        <span class="project-skill">Firewall</span>
+                        <span class="project-skill">Backup Solutions</span>
                     </div>
                 </div>
             </div>
