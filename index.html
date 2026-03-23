@@ -376,23 +376,26 @@
             transform: translateY(-3px);
         }
         
-        /* Experience Section */
+        /* Experience Section - Timeline with line */
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
+        /* The vertical line */
         .timeline::after {
             content: '';
             position: absolute;
-            width: 6px;
-            background-color: var(--accent);
-            top: 0;
-            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--highlight), var(--accent), var(--primary));
+            top: 20px;
+            bottom: 20px;
             left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
+            margin-left: -2px;
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(106, 113, 166, 0.6);
+            z-index: 1;
         }
         
         .timeline-item {
@@ -403,6 +406,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.8s ease, transform 0.8s ease;
+            z-index: 2;
         }
         
         .timeline-item.visible {
@@ -418,17 +422,24 @@
             left: 50%;
         }
         
-        /* Timeline connectors */
+        /* Timeline connectors - circles on the line */
         .timeline-item::after {
             content: '';
             position: absolute;
             width: 20px;
             height: 20px;
-            background-color: var(--accent);
+            background-color: var(--highlight);
             border: 4px solid var(--primary);
             border-radius: 50%;
-            top: 20px;
-            z-index: 1;
+            top: 28px;
+            z-index: 2;
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .timeline-item:hover::after {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.5);
         }
         
         .timeline-item:nth-child(odd)::after {
@@ -439,48 +450,62 @@
             left: -10px;
         }
         
-        /* Arrow pointers */
+        /* Arrow pointers for speech bubble effect */
         .timeline-content::before {
             content: '';
             position: absolute;
             width: 0;
             height: 0;
-            top: 20px;
+            top: 24px;
             border-style: solid;
+            z-index: 1;
         }
         
         .timeline-item:nth-child(odd) .timeline-content::before {
-            right: -10px;
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent rgba(42, 46, 75, 0.85);
+            right: -12px;
+            border-width: 12px 0 12px 12px;
+            border-color: transparent transparent transparent rgba(42, 46, 75, 0.95);
         }
         
         .timeline-item:nth-child(even) .timeline-content::before {
-            left: -10px;
-            border-width: 10px 10px 10px 0;
-            border-color: transparent rgba(42, 46, 75, 0.85) transparent transparent;
+            left: -12px;
+            border-width: 12px 12px 12px 0;
+            border-color: transparent rgba(42, 46, 75, 0.95) transparent transparent;
         }
         
         .timeline-content {
-            padding: 20px;
-            background: rgba(42, 46, 75, 0.85);
-            border-radius: 10px;
+            padding: 20px 25px;
+            background: rgba(42, 46, 75, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
             position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(106, 113, 166, 0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-3px);
         }
         
         .timeline-date {
             font-weight: bold;
             color: var(--highlight);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
         }
         
         .timeline-title {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: white;
+            font-size: 1.3rem;
         }
         
         .timeline-desc {
             font-size: 0.9rem;
+            line-height: 1.5;
+            color: #e0e0e0;
         }
         
         /* Projects Section */
@@ -524,7 +549,6 @@
             animation: skillSlideIn 0.5s ease forwards;
         }
         
-        /* Skill animation */
         @keyframes skillSlideIn {
             to {
                 opacity: 1;
@@ -532,7 +556,6 @@
             }
         }
         
-        /* Stagger the skill animations */
         .project-card:hover .project-skill:nth-child(1) { animation-delay: 0.1s; }
         .project-card:hover .project-skill:nth-child(2) { animation-delay: 0.2s; }
         .project-card:hover .project-skill:nth-child(3) { animation-delay: 0.3s; }
@@ -621,13 +644,14 @@
             
             .timeline-item::after {
                 left: 21px !important;
+                right: auto !important;
             }
             
             .timeline-item:nth-child(odd) .timeline-content::before,
             .timeline-item:nth-child(even) .timeline-content::before {
-                left: -10px;
-                border-width: 10px 10px 10px 0;
-                border-color: transparent rgba(42, 46, 75, 0.85) transparent transparent;
+                left: -12px;
+                border-width: 12px 12px 12px 0;
+                border-color: transparent rgba(42, 46, 75, 0.95) transparent transparent;
                 right: auto;
             }
             
@@ -698,10 +722,8 @@
     </style>
 </head>
 <body>
-    <!-- Starry Night Background -->
     <div id="stars"></div>
     
-    <!-- Header -->
     <header>
         <div class="container">
             <nav>
@@ -734,7 +756,6 @@
         </div>
     </section>
     
-    <!-- About Section -->
     <section id="about">
         <div class="container">
             <h2 class="section-title">About Me</h2>
@@ -748,7 +769,6 @@
         </div>
     </section>
     
-    <!-- Education Section -->
     <section id="education">
         <div class="container">
             <h2 class="section-title">Education</h2>
@@ -767,402 +787,81 @@
         </div>
     </section>
     
-    <!-- Skills Section (updated with new categories and tags) -->
     <section id="skills">
         <div class="container">
             <h2 class="section-title">Skills</h2>
             <div class="skills-container">
-                <div class="skill-category card">
-                    <h3>Languages & Scripting</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Shell Scripting</span>
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">CSS</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">R</span>
-                        <span class="skill-tag">VBA</span>
-                        <span class="skill-tag">iOS</span>
-                        <span class="skill-tag">Android</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category card">
-                    <h3>Frameworks & Libraries</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Scikit Learn</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">Keras</span>
-                        <span class="skill-tag">Matplotlib</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category card">
-                    <h3>Tools & Visualization</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Cognos</span>
-                        <span class="skill-tag">Power BI</span>
-                        <span class="skill-tag">Tableau</span>
-                        <span class="skill-tag">Excel</span>
-                        <span class="skill-tag">VS Code</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">JIRA</span>
-                        <span class="skill-tag">Xming</span>
-                        <span class="skill-tag">Putty</span>
-                        <span class="skill-tag">MATLAB</span>
-                        <span class="skill-tag">Selenium</span>
-                        <!-- New additions -->
-                        <span class="skill-tag">Microsoft 365</span>
-                        <span class="skill-tag">MDM/MAM</span>
-                        <span class="skill-tag">RBAC</span>
-                        <span class="skill-tag">MFA</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category card">
-                    <h3>DevOps & CI/CD</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Azure DevOps</span>
-                        <span class="skill-tag">Jenkins</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">Terraform</span>
-                        <span class="skill-tag">CI/CD Pipelines</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category card">
-                    <h3>Databases</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">SQL Server</span>
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Snowflake</span>
-                        <span class="skill-tag">NOSQL</span>
-                        <span class="skill-tag">DynamoDB</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category card">
-                    <h3>Cloud Platforms</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS (S3, EC2, Redshift, Glue, CDK)</span>
-                        <span class="skill-tag">Azure (Data Factory, Databricks, Data Lake, Synapse Analytics)</span>
-                    </div>
-                </div>
-
-                <!-- New skill category: Networking & Support -->
-                <div class="skill-category card">
-                    <h3>Networking & Support</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">DNS</span>
-                        <span class="skill-tag">DHCP</span>
-                        <span class="skill-tag">TCP/IP</span>
-                        <span class="skill-tag">VPN</span>
-                        <span class="skill-tag">Firewall & Endpoint Security</span>
-                        <span class="skill-tag">Hardware Troubleshooting</span>
-                        <span class="skill-tag">System Backups</span>
-                    </div>
-                </div>
+                <div class="skill-category card"><h3>Languages & Scripting</h3><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Java</span><span class="skill-tag">C++</span><span class="skill-tag">CSS</span><span class="skill-tag">HTML</span><span class="skill-tag">JavaScript</span><span class="skill-tag">R</span><span class="skill-tag">Shell Scripting</span><span class="skill-tag">Bash</span><span class="skill-tag">VBA</span></div></div>
+                <div class="skill-category card"><h3>Data Engineering</h3><div class="skill-tags"><span class="skill-tag">ETL Pipelines</span><span class="skill-tag">Data Modeling</span><span class="skill-tag">Data Warehousing</span><span class="skill-tag">Data Processing</span><span class="skill-tag">Data Cleaning</span><span class="skill-tag">Data Visualization</span><span class="skill-tag">Apache Spark</span><span class="skill-tag">Apache Kafka</span></div></div>
+                <div class="skill-category card"><h3>Frameworks & Libraries</h3><div class="skill-tags"><span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Scikit-learn</span><span class="skill-tag">TensorFlow</span><span class="skill-tag">Keras</span><span class="skill-tag">Matplotlib</span></div></div>
+                <div class="skill-category card"><h3>DevOps & CI/CD</h3><div class="skill-tags"><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">Jenkins</span><span class="skill-tag">Terraform</span><span class="skill-tag">CI/CD Pipelines</span><span class="skill-tag">Azure DevOps</span></div></div>
+                <div class="skill-category card"><h3>Databases</h3><div class="skill-tags"><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">SQL Server</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Snowflake</span><span class="skill-tag">DynamoDB</span><span class="skill-tag">NOSQL</span></div></div>
+                <div class="skill-category card"><h3>Cloud Platforms</h3><div class="skill-tags"><span class="skill-tag">AWS (S3, EC2, Redshift, Glue, CDK)</span><span class="skill-tag">Azure (Data Factory, Databricks, Synapse, Data Lake)</span></div></div>
+                <div class="skill-category card"><h3>Tools & Visualization</h3><div class="skill-tags"><span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Excel</span><span class="skill-tag">Cognos</span><span class="skill-tag">Git</span><span class="skill-tag">JIRA</span><span class="skill-tag">VS Code</span><span class="skill-tag">Selenium</span><span class="skill-tag">Microsoft 365</span></div></div>
+                <div class="skill-category card"><h3>Networking & Support</h3><div class="skill-tags"><span class="skill-tag">DNS</span><span class="skill-tag">DHCP</span><span class="skill-tag">TCP/IP</span><span class="skill-tag">VPN</span><span class="skill-tag">Firewall & Endpoint Security</span><span class="skill-tag">Hardware Troubleshooting</span><span class="skill-tag">System Backups</span></div></div>
             </div>
         </div>
     </section>
     
-   
     <section id="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content card">
-                        <div class="timeline-date">10/2023 - 12/2025</div>
-                        <h3 class="timeline-title">Data Operations Assistant</h3>
-                        <h4>WMU, MI, USA</h4>
-                        <p class="timeline-desc">
-                            • Processed, cleaned, and validated large-scale academic datasets, improving data accuracy and consistency by 40% through automated quality checks and normalization workflows.<br>
-                            • Automated recurring data ingestion and transformation pipelines using Python/SQL, reducing manual processing time by 45% and improving turnaround for analytics use cases.<br>
-                            • Standardized datasets and reporting outputs, enabling ~25% faster downstream analysis for faculty and administrative decision-making.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content card">
-                        <div class="timeline-date">09/2024 - 12/2025</div>
-                        <h3 class="timeline-title">Teaching Assistant & Supervisor</h3>
-                        <h4>Western Michigan University, MI, USA</h4>
-                        <p class="timeline-desc">
-                            • Lead Teaching Assistant supervising a team of tutors, coordinating academic support for 100+ students across programming (Python, Java, C), mathematics, and physics<br>
-                            • Delivered technical tutoring and coding mentorship, breaking down complex algorithms and data structures
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content card">
-                        <div class="timeline-date">09/2023 - 01/2024</div>
-                        <h3 class="timeline-title">Project Development Intern</h3>
-                        <h4>Riipen (Western Michigan University), MI, USA</h4>
-                        <p class="timeline-desc">
-                            • Engineered a full-stack web portal for educational consultancy with advanced search and filtering features<br>
-                            • Built responsive frontend components using HTML, CSS, JavaScript and integrated RESTful APIs
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content card">
-                        <div class="timeline-date">06/2021 - 09/2023</div>
-                        <h3 class="timeline-title">Software Engineer Lead - Professional</h3>
-                        <h4>PROLIFICS, Hyderabad, India</h4>
-                        <p class="timeline-desc">
-                            • Administered and optimized databases handling 10M+ records for a large-scale IBM project with Dubai Health Authority<br>
-                            • Designed and delivered 15+ interactive dashboards enabling real-time monitoring of 50+ healthcare KPIs<br>
-                            • Built and automated ETL pipelines integrating data from 5+ disparate sources, reducing reporting latency by 40%<br>
-                            • Developed and deployed 100+ enterprise reports using IBM Cognos
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content card">
-                        <div class="timeline-date">02/2019 - 05/2021</div>
-                        <h3 class="timeline-title">ML Engineer</h3>
-                        <h4>LEAP, Hyderabad, India (Remote)</h4>
-                        <p class="timeline-desc">
-                            • Developed an ML-driven quality control system that reduced product defects by 25%<br>
-                            • Built predictive maintenance models decreasing machine downtime by 30%<br>
-                            • Designed IoT data pipelines capable of processing 1M+ sensor events per day<br>
-                            • Designed and deployed ETL pipelines using AWS Glue and Redshift, improving data processing efficiency by 40%
-                        </p>
-                    </div>
-                </div>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-content card"><div class="timeline-date">10/2023 - 12/2025</div><h3 class="timeline-title">Data Operations Assistant</h3><h4>WMU, MI, USA</h4><p class="timeline-desc">• Processed, cleaned, and validated large-scale academic datasets, improving data accuracy and consistency by 40% through automated quality checks and normalization workflows.<br>• Automated recurring data ingestion and transformation pipelines using Python/SQL, reducing manual processing time by 45% and improving turnaround for analytics use cases.<br>• Standardized datasets and reporting outputs, enabling ~25% faster downstream analysis for faculty and administrative decision-making.</p></div></div>
+                <div class="timeline-item"><div class="timeline-content card"><div class="timeline-date">09/2024 - 12/2025</div><h3 class="timeline-title">Teaching Assistant & Supervisor</h3><h4>Western Michigan University, MI, USA</h4><p class="timeline-desc">• Lead Teaching Assistant supervising a team of tutors, coordinating academic support for 100+ students across programming (Python, Java, C), mathematics, and physics<br>• Delivered technical tutoring and coding mentorship, breaking down complex algorithms and data structures</p></div></div>
+                <div class="timeline-item"><div class="timeline-content card"><div class="timeline-date">09/2023 - 01/2024</div><h3 class="timeline-title">Project Development Intern</h3><h4>Riipen (Western Michigan University), MI, USA</h4><p class="timeline-desc">• Engineered a full-stack web portal for educational consultancy with advanced search and filtering features<br>• Built responsive frontend components using HTML, CSS, JavaScript and integrated RESTful APIs</p></div></div>
+                <div class="timeline-item"><div class="timeline-content card"><div class="timeline-date">06/2021 - 09/2023</div><h3 class="timeline-title">Software Engineer Lead - Professional</h3><h4>PROLIFICS, Hyderabad, India</h4><p class="timeline-desc">• Administered and optimized databases handling 10M+ records for a large-scale IBM project with Dubai Health Authority<br>• Designed and delivered 15+ interactive dashboards enabling real-time monitoring of 50+ healthcare KPIs<br>• Built and automated ETL pipelines integrating data from 5+ disparate sources, reducing reporting latency by 40%<br>• Developed and deployed 100+ enterprise reports using IBM Cognos</p></div></div>
+                <div class="timeline-item"><div class="timeline-content card"><div class="timeline-date">02/2019 - 05/2021</div><h3 class="timeline-title">ML Engineer</h3><h4>LEAP, Hyderabad, India (Remote)</h4><p class="timeline-desc">• Developed an ML-driven quality control system that reduced product defects by 25%<br>• Built predictive maintenance models decreasing machine downtime by 30%<br>• Designed IoT data pipelines capable of processing 1M+ sensor events per day<br>• Designed and deployed ETL pipelines using AWS Glue and Redshift, improving data processing efficiency by 40%</p></div></div>
             </div>
         </div>
     </section>
     
-    <!-- Projects Section (updated with two new projects) -->
     <section id="projects">
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
+                <!-- New Project 1: Smart Healthcare Data Pipeline -->
                 <div class="project-card card">
-                    <h3 class="project-title">Plant Health Using AI</h3>
-                    <p class="project-desc">Uses CNNs and Transfer Learning for early detection of plant diseases in corn crops. Utilized the PlantVillage dataset to create a scalable solution for enhancing crop yield and agricultural productivity.</p>
-                    <div class="project-skills">
-                        <span class="project-skill">Python</span>
-                        <span class="project-skill">Keras</span>
-                        <span class="project-skill">TensorFlow</span>
-                        <span class="project-skill">CNN</span>
-                        <span class="project-skill">Transfer Learning</span>
-                    </div>
+                    <h3 class="project-title">Smart Healthcare Data Pipeline & Analytics Dashboard</h3>
+                    <p class="project-desc">Designed and implemented an end-to-end data pipeline using Python, SQL, and AWS (S3, Glue, Redshift). Built ETL workflows for data ingestion, transformation, and loading to improve processing efficiency. Developed REST APIs to expose processed data for applications and analytics use cases. Created interactive dashboards using Power BI/Tableau for real-time insights and KPI monitoring. Implemented data validation and error handling to ensure data quality and consistency.</p>
+                    <div class="project-skills"><span class="project-skill">Python</span><span class="project-skill">SQL</span><span class="project-skill">AWS (S3/Glue/Redshift)</span><span class="project-skill">ETL Pipelines</span><span class="project-skill">REST APIs</span><span class="project-skill">Power BI</span><span class="project-skill">Tableau</span></div>
                 </div>
-                
+                <!-- New Project 2: Medical AI & Data Processing System -->
                 <div class="project-card card">
-                    <h3 class="project-title">Hate Speech Detection</h3>
-                    <p class="project-desc">Developed a sophisticated platform utilizing Neural Networks to identify and flag offensive content on various social media platforms. Applied Machine Learning techniques for data analysis and classification.</p>
-                    <div class="project-skills">
-                        <span class="project-skill">Python</span>
-                        <span class="project-skill">Neural Networks</span>
-                        <span class="project-skill">NLP</span>
-                        <span class="project-skill">Scikit-learn</span>
-                    </div>
+                    <h3 class="project-title">Medical AI & Data Processing System</h3>
+                    <p class="project-desc">Built a multi-module AI system using deep learning and NLP for healthcare data analysis. Designed data pipelines and backend processing for medical data extraction and analysis. Built and optimized data processing pipelines for structured and unstructured medical data, improving analysis speed and supporting real-time healthcare insights.</p>
+                    <div class="project-skills"><span class="project-skill">Deep Learning</span><span class="project-skill">NLP</span><span class="project-skill">Python</span><span class="project-skill">ETL Pipelines</span><span class="project-skill">Healthcare Analytics</span><span class="project-skill">Data Processing</span></div>
                 </div>
-                
-                <div class="project-card card">
-                    <h3 class="project-title">FeastFetch</h3>
-                    <p class="project-desc">Built a scalable recipe search engine integrating 3M+ recipes across multiple datasets using advanced IR methods (TF-IDF, BM25). Developed real-time Telegram bot with Python, pandas, and scikit-learn.</p>
-                    <div class="project-skills">
-                        <span class="project-skill">Python</span>
-                        <span class="project-skill">Pandas</span>
-                        <span class="project-skill">TF-IDF</span>
-                        <span class="project-skill">REST API</span>
-                    </div>
-                </div>
-                
-                <div class="project-card card">
-                    <h3 class="project-title">Health Monitoring System</h3>
-                    <p class="project-desc">Designed a multifunctional health monitoring device using Raspberry Pi & Machine Learning to track temperature, heart rate, blood pressure, and SPO2. Automated notifications to nearby hospitals in case of critical readings.</p>
-                    <div class="project-skills">
-                        <span class="project-skill">Raspberry Pi</span>
-                        <span class="project-skill">Python</span>
-                        <span class="project-skill">Sensors</span>
-                        <span class="project-skill">IoT</span>
-                        <span class="project-skill">Machine Learning</span>
-                    </div>
-                </div>
-                
-                <div class="project-card card">
-                    <h3 class="project-title">Smart Aquarium</h3>
-                    <p class="project-desc">Developed an Arduino-based project for aquarium temperature monitoring and fish feeding reminders. Integrated temperature sensor for real-time data display and automated adjustments.</p>
-                    <div class="project-skills">
-                        <span class="project-skill">Arduino</span>
-                        <span class="project-skill">C++</span>
-                        <span class="project-skill">IoT</span>
-                        <span class="project-skill">Sensors</span>
-                    </div>
-                </div>
-
-                <!-- New project: Medical AI Diagnostic Assistant -->
-                <div class="project-card card">
-                    <h3 class="project-title">Medical AI Diagnostic Assistant</h3>
-                    <p class="project-desc">Built a 3-module, multi-modal medical AI system leveraging DenseNet-121, Sentence-BERT NLP covering 8 condition categories with weighted confidence scoring, and an OCR-based ECG pipeline (EasyOCR) implementing multi-factor cardiac risk scoring and emergency prioritization.</p>
-                    <div class="project-skills">
-                        <span class="project-skill">DenseNet-121</span>
-                        <span class="project-skill">Sentence-BERT</span>
-                        <span class="project-skill">EasyOCR</span>
-                        <span class="project-skill">Python</span>
-                        <span class="project-skill">NLP</span>
-                        <span class="project-skill">Multi-modal</span>
-                    </div>
-                </div>
-
-                <!-- New project: Multi-Site IT Infrastructure & Secure Network Simulation -->
-                <div class="project-card card">
-                    <h3 class="project-title">Multi-Site IT Infrastructure & Secure Network Simulation</h3>
-                    <p class="project-desc">Developed and implemented a simulated multi-office IT environment using Windows Server, Active Directory, DNS/DHCP, and VPN connectivity to ensure secure cross-site communication. Established endpoint hardening policies, configured firewall rules, implemented centralized backup solutions, and conducted system health monitoring to maintain 99%+ service uptime.</p>
-                    <div class="project-skills">
-                        <span class="project-skill">Windows Server</span>
-                        <span class="project-skill">Active Directory</span>
-                        <span class="project-skill">DNS/DHCP</span>
-                        <span class="project-skill">VPN</span>
-                        <span class="project-skill">Firewall</span>
-                        <span class="project-skill">Backup Solutions</span>
-                    </div>
-                </div>
+                <!-- Existing Projects -->
+                <div class="project-card card"><h3 class="project-title">Plant Health Using AI</h3><p class="project-desc">Uses CNNs and Transfer Learning for early detection of plant diseases in corn crops. Utilized the PlantVillage dataset to create a scalable solution for enhancing crop yield and agricultural productivity.</p><div class="project-skills"><span class="project-skill">Python</span><span class="project-skill">Keras</span><span class="project-skill">TensorFlow</span><span class="project-skill">CNN</span><span class="project-skill">Transfer Learning</span></div></div>
+                <div class="project-card card"><h3 class="project-title">Hate Speech Detection</h3><p class="project-desc">Developed a sophisticated platform utilizing Neural Networks to identify and flag offensive content on various social media platforms. Applied Machine Learning techniques for data analysis and classification.</p><div class="project-skills"><span class="project-skill">Python</span><span class="project-skill">Neural Networks</span><span class="project-skill">NLP</span><span class="project-skill">Scikit-learn</span></div></div>
+                <div class="project-card card"><h3 class="project-title">FeastFetch</h3><p class="project-desc">Built a scalable recipe search engine integrating 3M+ recipes across multiple datasets using advanced IR methods (TF-IDF, BM25). Developed real-time Telegram bot with Python, pandas, and scikit-learn.</p><div class="project-skills"><span class="project-skill">Python</span><span class="project-skill">Pandas</span><span class="project-skill">TF-IDF</span><span class="project-skill">REST API</span></div></div>
+                <div class="project-card card"><h3 class="project-title">Health Monitoring System</h3><p class="project-desc">Designed a multifunctional health monitoring device using Raspberry Pi & Machine Learning to track temperature, heart rate, blood pressure, and SPO2. Automated notifications to nearby hospitals in case of critical readings.</p><div class="project-skills"><span class="project-skill">Raspberry Pi</span><span class="project-skill">Python</span><span class="project-skill">Sensors</span><span class="project-skill">IoT</span><span class="project-skill">Machine Learning</span></div></div>
+                <div class="project-card card"><h3 class="project-title">Smart Aquarium</h3><p class="project-desc">Developed an Arduino-based project for aquarium temperature monitoring and fish feeding reminders. Integrated temperature sensor for real-time data display and automated adjustments.</p><div class="project-skills"><span class="project-skill">Arduino</span><span class="project-skill">C++</span><span class="project-skill">IoT</span><span class="project-skill">Sensors</span></div></div>
+                <div class="project-card card"><h3 class="project-title">Multi-Site IT Infrastructure & Secure Network Simulation</h3><p class="project-desc">Developed and implemented a simulated multi-office IT environment using Windows Server, Active Directory, DNS/DHCP, and VPN connectivity to ensure secure cross-site communication. Established endpoint hardening policies, configured firewall rules, implemented centralized backup solutions, and conducted system health monitoring to maintain 99%+ service uptime.</p><div class="project-skills"><span class="project-skill">Windows Server</span><span class="project-skill">Active Directory</span><span class="project-skill">DNS/DHCP</span><span class="project-skill">VPN</span><span class="project-skill">Firewall</span><span class="project-skill">Backup Solutions</span></div></div>
             </div>
         </div>
     </section>
     
-    <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-details">
-                    <p><i class="fas fa-envelope"></i> psupriya2953@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> 269-220-1385</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Kalamazoo, MI, USA</p>
-                </div>
-                
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/supriyapilli/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/Supriya-P-29" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                </div>
-            </div>
+            <div class="contact-content"><div class="contact-details"><p><i class="fas fa-envelope"></i> psupriya2953@gmail.com</p><p><i class="fas fa-phone"></i> 269-220-1385</p><p><i class="fas fa-map-marker-alt"></i> Kalamazoo, MI, USA</p></div><div class="social-links"><a href="https://www.linkedin.com/in/supriyapilli/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><a href="https://github.com/Supriya-P-29" target="_blank"><i class="fab fa-github"></i> GitHub</a></div></div>
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 Supriya Pilli. All rights reserved.</p>
-        </div>
-    </footer>
+    <footer><div class="container"><p>&copy; 2025 Supriya Pilli. All rights reserved.</p></div></footer>
     
     <script>
-        // Create starry night background with shooting stars
         document.addEventListener('DOMContentLoaded', function() {
             const starsContainer = document.getElementById('stars');
-            const starsCount = 200;
-            
-            // Create regular stars
-            for (let i = 0; i < starsCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                const size = Math.random() * 3;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                
-                const duration = 3 + Math.random() * 10;
-                const delay = Math.random() * 5;
-                star.style.animationDuration = `${duration}s`;
-                star.style.animationDelay = `${delay}s`;
-                
-                starsContainer.appendChild(star);
-            }
-            
-            // Create shooting stars
-            function createShootingStar() {
-                const shootingStar = document.createElement('div');
-                shootingStar.classList.add('shooting-star');
-                
-                const startX = Math.random() * 20;
-                const startY = Math.random() * 20;
-                
-                shootingStar.style.left = `${startX}%`;
-                shootingStar.style.top = `${startY}%`;
-                
-                const duration = 2 + Math.random() * 3;
-                shootingStar.style.animationDuration = `${duration}s`;
-                
-                starsContainer.appendChild(shootingStar);
-                
-                // Remove the element after animation completes
-                setTimeout(() => {
-                    shootingStar.remove();
-                }, duration * 1000);
-            }
-            
-            // Create shooting stars at intervals
+            for (let i = 0; i < 200; i++) { const star = document.createElement('div'); star.classList.add('star'); const size = Math.random() * 3; star.style.width = `${size}px`; star.style.height = `${size}px`; star.style.left = `${Math.random() * 100}%`; star.style.top = `${Math.random() * 100}%`; star.style.animationDuration = `${3 + Math.random() * 10}s`; star.style.animationDelay = `${Math.random() * 5}s`; starsContainer.appendChild(star); }
+            function createShootingStar() { const shootingStar = document.createElement('div'); shootingStar.classList.add('shooting-star'); shootingStar.style.left = `${Math.random() * 20}%`; shootingStar.style.top = `${Math.random() * 20}%`; shootingStar.style.animationDuration = `${2 + Math.random() * 3}s`; starsContainer.appendChild(shootingStar); setTimeout(() => shootingStar.remove(), (2 + Math.random() * 3) * 1000); }
             setInterval(createShootingStar, 3000);
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Header scroll effect
-            const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-            
-            // Animation on scroll
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe section titles and cards
-            document.querySelectorAll('.section-title, .card, .timeline-item').forEach(el => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { e.preventDefault(); const targetId = this.getAttribute('href'); if (targetId === '#') return; const targetElement = document.querySelector(targetId); if (targetElement) window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' }); }); });
+            const header = document.querySelector('header'); window.addEventListener('scroll', () => { if (window.scrollY > 50) header.classList.add('scrolled'); else header.classList.remove('scrolled'); });
+            const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+            document.querySelectorAll('.section-title, .card, .timeline-item').forEach(el => observer.observe(el));
         });
     </script>
 </body>
